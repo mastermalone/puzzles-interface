@@ -1,0 +1,34 @@
+{
+    "modal": {
+        "defaultimage": "https://abcmouse.com/artwork/some-image-level1.png",
+        "level": {
+            "one": {
+                "image": "https://abcmouse.com/artwork/some-image-level1.png",
+                "completed": false
+            }
+            "two": {
+                "image": "https://abcmouse.com/artwork/some-image-level2.png",
+                "completed": false
+            }
+            "three": {
+                "image": "https://abcmouse.com/artwork/some-image-level3.png",
+                "completed": false
+            }
+            "four": {
+                "image": "https://abcmouse.com/artwork/some-image-level4.png",
+                "completed": false
+            }
+            "five": {
+                "image": "https://abcmouse.com/artwork/some-image-level5.png",
+                "completed": false
+            }
+            "six": {
+                "image": "https://abcmouse.com/artwork/some-image-level6.png",
+                "completed": false
+            }
+        
+        }
+    
+    }
+
+}
