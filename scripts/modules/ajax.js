@@ -4,7 +4,7 @@ define(function(){
        //Constructor
        var date = new Date();
        
-       this.defaultURL = "views/header.html?a="+date.getTime();
+       this.defaultURL = "templates/header.html?a="+date.getTime();
        //this.defaultURL = "json/puzzle.json?a="+date.getTime();
        console.log("CONSTRUCTING AJAX", this.defaultURL);
     }

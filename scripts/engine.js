@@ -1,13 +1,15 @@
 //All Engine related script goes here
-require(["ajax", "extend", "events", "createNode", "transitionend"], function(Ajax, Extend, Evt, CreateNode, Transition){
+//define(["ajax", "extend", "events", "createNode", "transitionend"], function(Ajax, Extend, Evt, CreateNode, Transition){
+define(["ajax", "extend", "events", "level-select", "transitionend"], function(Ajax, Extend, Evt, LevelSelect, Transition){
     
     var Engine = {
         date: new Date(),
         init: function () {
-            var ext = new Extend(), evt = new Evt();
+            var ext = new Extend(), evt = new Evt(), lvs = LevelSelect;
             
             function SubAjax (id) {
                 this.id = id;
+                //Use this to make the API call
             }
             ext.extend(SubAjax, Ajax);
             
@@ -18,35 +20,26 @@ require(["ajax", "extend", "events", "createNode", "transitionend"], function(Aj
             sb = new SubAjax("subAjax");
             sb.newFunction("HELLO");
             sb.addResponseToDOM("main");
-            evt.addEvent(window, ["mousedown"], this.delegate);
+            evt.addEvent(window, ["mousedown", "mouseover"], this.delegate);
             
+            lvs.getView();//Gets the level Select View            
         },
         delegate: function (e) {
            switch(e.type){
                case "mousedown":
                switch(e.target.id){
-                   case "lv-select-trigger": Engine.buildModal(e, "modal-bg"); break;
+                   //case "lv-select-trigger": Engine.buildModal(e, "modal-bg"); break;
+                   case "lv-select-trigger": Engine.showModal(e, "modal-bg"); break;
                    case "modal-bg": Engine.fade(e); break;
                }
                break;
+               case "mouseover":
+               //console.log(e.target.id);
+               break;
            }
         },
-        buildModal: function (e, el) {
-            var theDiv = new CreateNode(), dv, domDv = document.getElementById("modal-bg");
-            if(domDv){
-                console.log("the element is created", typeof dv);
-                Engine.fadeIn(domDv.id);
-                return;
-            }else{
-                dv = theDiv.makeElement("DIV", "id", "modal-bg");
-                document.getElementById("main-wrapper").appendChild(dv);
-                console.log("Setting up the div", typeof dv.nodeName);
-                
-                sb.getData("views/level-select.html?a="+Engine.date.getTime(), function(data){
-                    var elm = document.getElementById(el);
-                    elm.innerHTML = data;
-                });
-            };
+        showModal: function (e, el) {
+            Engine.fadeIn("modal-bg");
         },
         fade: function (e) {
             var transEnd = Transition.transitionEnd(), evt = new Evt();
@@ -62,8 +55,9 @@ require(["ajax", "extend", "events", "createNode", "transitionend"], function(Aj
             }else{
                 targ = obj;
             }
-            targ.style.display = "block";
+            
             targ.className = "fade-in";
+            targ.style.display = "block";
         },
         fadeEnded: function (e) {
             console.log("SHOULD BE DONE ANIMATING");
@@ -71,5 +65,5 @@ require(["ajax", "extend", "events", "createNode", "transitionend"], function(Aj
         }
     };
     
-    Engine.init();
+    return Engine;
 });
